@@ -72,6 +72,11 @@ a:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6p
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:8px}
 .tag{font-size:13px;padding:3px 11px;border-radius:999px;border:1px solid #233140;color:#9fb0c2}
 .status{font-size:13px;color:var(--acc)}
+.plinks{display:flex;flex-wrap:wrap;gap:10px;padding-top:14px;margin-top:4px;border-top:1px solid var(--line)}
+.plink{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line2);text-decoration:none;font-size:15px;font-weight:500}
+.plink:hover{border-color:var(--acc)}
+.plink.main{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+.pnote{font-size:13px;color:var(--mute)}
 .alt{background:#0f141b;border-block:1px solid var(--s2)}
 .edu .card{flex-direction:row;align-items:center;gap:20px;flex-wrap:wrap}
 .yr{font-family:'Space Grotesk';color:var(--acc);white-space:nowrap}
@@ -260,7 +265,7 @@ const job=[
 ["Mentoria","treinamento e acompanhamento técnico de jovens aprendizes e profissionais iniciantes, promovendo autonomia e evolução técnica."]];
 const projects=[
 ["Qlista","PWA de lista de compras com sincronização em tempo real. Evoluo o app continuamente: novas funcionalidades, correção de bugs e testes.",["PWA","Firebase","JavaScript"],"Em evolução"],
-["Lumivia","Plataforma que criei para a minha prática terapêutica: área do cliente com login, acompanhamento de evolução e conteúdos liberados por etapa, hospedada sem custo.",["GitHub Pages","Supabase","Auth"],"Publicado"]];
+["Lumivia","Plataforma que criei para a minha prática terapêutica: área do cliente com login, acompanhamento de evolução e conteúdos liberados por etapa, hospedada sem custo.",["Cloudflare Pages","Supabase","Auth"],"Publicado",[["Ver demo","https://lumivia-demo.pages.dev/",1],["Ver case","https://github.com/saradevelopii/lumivia",0]],"Demo com dados fictícios."]];
 const tags=t=>`<div class="tags">${t.map(x=>`<span class="tag">${x}</span>`).join('')}</div>`;
 document.getElementById('skills').innerHTML=skills.map(([i,h,p,t])=>`<div class="card"><h3><span class="ico"><svg viewBox="0 0 24 24">${I[i]}</svg></span>${h}</h3><p>${p}</p>${tags(t)}</div>`).join('');
 const li=([b,t])=>`<li><span><b>${b}:</b> ${t}</span></li>`;
@@ -269,7 +274,7 @@ document.getElementById('jobMore').innerHTML=job.slice(5).map(li).join('');
 document.getElementById('stack').innerHTML=stack.map(([g,t])=>`<div><h4>${g}</h4>${tags(t).replace('margin-top:auto','')}</div>`).join('');
 const mail=document.getElementById('mail'),ok=document.getElementById('mailok');
 mail.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('sara.developi@gmail.com');ok.textContent='copiado ✓'}catch(e){ok.textContent='selecione e copie'}setTimeout(()=>ok.textContent='copiar',2200)});
-document.getElementById('projects').innerHTML=projects.map(([h,p,t,s])=>`<div class="card"><span class="status">● ${s}</span><h3>${h}</h3><p>${p}</p>${tags(t)}</div>`).join('');
+document.getElementById('projects').innerHTML=projects.map(([h,p,t,s,l,n])=>`<div class="card"><span class="status">● ${s}</span><h3>${h}</h3><p>${p}</p>${tags(t)}${l?`<div class="plinks">${l.map(([x,u,m])=>`<a class="plink${m?' main':''}" href="${u}" target="_blank" rel="noopener">${x}</a>`).join('')}</div>`:''}${n?`<span class="pnote">${n}</span>`:''}</div>`).join('');
 }
 </script>
 </body>
